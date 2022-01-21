@@ -10,4 +10,7 @@ public class SpringDemoAllApplication {
 		SpringApplication.run(SpringDemoAllApplication.class, args);
 	}
 
+	public void common() {
+
+	}
 }
