@@ -1,6 +1,5 @@
-package com.example.springdemoall.aspect;
+package com.example.springdemoall.aop.common;
 
-import com.example.springdemoall.SpringDemoAllApplication;
 import org.aopalliance.aop.Advice;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;

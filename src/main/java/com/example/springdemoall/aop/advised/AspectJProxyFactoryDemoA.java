@@ -1,18 +1,14 @@
-package com.example.springdemoall.advised;
+package com.example.springdemoall.aop.advised;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.junit.jupiter.api.Test;
-import org.springframework.aop.Advisor;
-import org.springframework.aop.aspectj.AspectInstanceFactory;
 import org.springframework.aop.aspectj.InstantiationModelAwarePointcutAdvisor;
 import org.springframework.aop.aspectj.annotation.AspectJAdvisorFactory;
 import org.springframework.aop.aspectj.annotation.MetadataAwareAspectInstanceFactory;
 import org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory;
 import org.springframework.aop.aspectj.annotation.SimpleMetadataAwareAspectInstanceFactory;
-
-import java.util.List;
 
 public class AspectJProxyFactoryDemoA {
 

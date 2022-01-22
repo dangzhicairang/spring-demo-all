@@ -1,37 +1,24 @@
-package com.example.springdemoall.proxyprocessor.autoproxy;
+package com.example.springdemoall.aop.aop;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.junit.jupiter.api.Test;
-import org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator;
-import org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
 @Configuration
-public class AnnotationAwareAdvisorAutoProxyCreatorDemo {
-
-    @Configuration
-    public static class Config {
-
-        @Bean
-        public AbstractAutoProxyCreator autoProxyCreator() {
-
-            return new AnnotationAwareAspectJAutoProxyCreator();
-        }
-    }
+@EnableAspectJAutoProxy
+public class SpringAopDemo {
 
     @Aspect
     @Component
     public static class MyAspect {
 
-        @Pointcut("execution(* com.example.springdemoall.proxyprocessor.autoproxy..*.hello())")
-        public void pointcut() {
-
-        }
+        @Pointcut("execution(* com.example.springdemoall.aop.aop..*.hello())")
+        public void pointcut() {}
 
         @Before("pointcut()")
         public void before() {
@@ -54,7 +41,7 @@ public class AnnotationAwareAdvisorAutoProxyCreatorDemo {
     @Test
     public void test() {
         AnnotationConfigApplicationContext context
-                = new AnnotationConfigApplicationContext(AnnotationAwareAdvisorAutoProxyCreatorDemo.class);
+                = new AnnotationConfigApplicationContext(SpringAopDemo.class);
         Hello bean = context.getBean(Hello.class);
         bean.hello();
     }

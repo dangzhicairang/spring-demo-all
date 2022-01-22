@@ -1,16 +1,18 @@
-package com.example.springdemoall.proxyprocessor.autoproxy;
+package com.example.springdemoall.aop.proxyprocessor.autoproxy;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.aop.Advisor;
 import org.springframework.aop.MethodBeforeAdvice;
 import org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator;
-import org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
+import org.springframework.aop.support.NameMatchMethodPointcutAdvisor;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @Configuration
-public class BeanNameAutoProxyCreatorDemo {
+public class DefaultAdvisorAutoProxyCreatorDemo {
 
     @Configuration
     public static class Config {
@@ -18,17 +20,30 @@ public class BeanNameAutoProxyCreatorDemo {
         @Bean
         public AbstractAutoProxyCreator autoProxyCreator() {
 
-            BeanNameAutoProxyCreator beanNameAutoProxyCreator
-                    = new BeanNameAutoProxyCreator();
-            beanNameAutoProxyCreator.setBeanNames("*Impl");
-            beanNameAutoProxyCreator.setInterceptorNames("advice");
-            return beanNameAutoProxyCreator;
+            DefaultAdvisorAutoProxyCreator autoProxyCreator
+                    = new DefaultAdvisorAutoProxyCreator();
+
+            // 打开前缀匹配
+            autoProxyCreator.setUsePrefix(true);
+
+            // 指定前缀
+            autoProxyCreator.setAdvisorBeanNamePrefix("test");
+
+            return autoProxyCreator;
         }
 
         @Bean
         public MethodBeforeAdvice advice() {
 
-            return (m, t, a) -> System.out.println("before");
+            return (m, a, t) -> System.out.println("before");
+        }
+
+        @Bean
+        public Advisor testAdvisor() {
+            NameMatchMethodPointcutAdvisor advisor
+                    = new NameMatchMethodPointcutAdvisor(advice());
+            advisor.setMappedName("hello*");
+            return advisor;
         }
     }
 
@@ -50,17 +65,12 @@ public class BeanNameAutoProxyCreatorDemo {
             System.out.println("hello1");
         }
     }
+
     @Test
     public void test() {
         AnnotationConfigApplicationContext context
-                = new AnnotationConfigApplicationContext(BeanNameAutoProxyCreatorDemo.class);
+                = new AnnotationConfigApplicationContext(DefaultAdvisorAutoProxyCreatorDemo.class);
         Hello bean = context.getBean(Hello.class);
-
-        /**
-         * 因为声明的是 MethodBeforeAdvice，会被适配成 DefaultPointcutAdvisor
-         *      即 MethodMatcher == TRUE，所以匹配 beanName 的目标 bean 的方法
-         *      都会被代理
-         */
         bean.hello();
         bean.hello1();
     }

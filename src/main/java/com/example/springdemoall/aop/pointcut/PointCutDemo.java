@@ -1,4 +1,4 @@
-package com.example.springdemoall.pointcut;
+package com.example.springdemoall.aop.pointcut;
 
 import org.aspectj.lang.annotation.After;
 import org.junit.jupiter.api.Test;

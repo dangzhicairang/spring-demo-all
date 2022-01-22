@@ -1,4 +1,4 @@
-package com.example.springdemoall.advised;
+package com.example.springdemoall.aop.advised;
 
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -19,7 +19,7 @@ public class AspectJProxyFactoryDemoB {
     @Aspect
     public static class MyAspect {
 
-        @Pointcut("execution(* com.example.springdemoall.advised..hello())")
+        @Pointcut("execution(* com.example.springdemoall.aop.advised..hello())")
         public void pointcut() {
 
         }

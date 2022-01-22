@@ -1,6 +1,5 @@
-package com.example.springdemoall.aspect;
+package com.example.springdemoall.aop.common;
 
-import org.aopalliance.aop.Advice;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.Advisor;

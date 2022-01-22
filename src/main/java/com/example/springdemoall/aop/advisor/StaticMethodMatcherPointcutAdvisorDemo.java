@@ -1,4 +1,4 @@
-package com.example.springdemoall.advisor;
+package com.example.springdemoall.aop.advisor;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.aop.framework.adapter.MethodBeforeAdviceInterceptor;
