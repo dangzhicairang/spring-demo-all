@@ -23,6 +23,7 @@ public class SampleComponent {
         this.age = age;
     }
 
+    // 支持自定义配置
     public void configurer(Supplier<String> name, Supplier<Integer> age) {
         this.name = name.get();
         this.age = age.get();

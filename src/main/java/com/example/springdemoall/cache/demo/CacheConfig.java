@@ -16,6 +16,7 @@ import java.lang.reflect.Method;
 public class CacheConfig implements CachingConfigurer {
 
     // 注册 ConcurrentMapCacheManager
+    @Bean
     @Override
     public CacheManager cacheManager() {
         ConcurrentMapCacheManager cacheManager
@@ -24,6 +25,7 @@ public class CacheConfig implements CachingConfigurer {
     }
 
     // 自定义配置 KeyGenerator
+    @Bean
     @Override
     public KeyGenerator keyGenerator() {
 

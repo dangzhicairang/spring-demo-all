@@ -11,6 +11,7 @@ public class TestDemo {
     @Import({ SampleComponentConfiguration.class })
     public static class Config implements SampleComponentConfigurer {
 
+        // 自定义组件属性
         @Override
         public String getName() {
             return "dd";

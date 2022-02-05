@@ -16,6 +16,9 @@ public abstract class AbstractSampleComponentConfiguration {
     Supplier<String> name;
     Supplier<Integer> age;
 
+    /**
+     * 基于自定义提供的 SampleComponentConfigurer 来配置对应属性
+     */
     @Autowired
     public void setConfigurer(ObjectProvider<SampleComponentConfigurer> configurers) {
 
@@ -31,10 +34,12 @@ public abstract class AbstractSampleComponentConfiguration {
             }
             return configurerList.get(0);
         };
+
         name = adapt(supplier, SampleComponentConfigurer::getName);
         age = adapt(supplier, SampleComponentConfigurer::getAge);
     }
 
+    // Supplier<SampleComponentConfigurer> 到 Supplier<T> 的映射，T 即属性类型
     private <T> Supplier<T> adapt(Supplier<SampleComponentConfigurer> supplier
             , Function<SampleComponentConfigurer, T> function) {
 

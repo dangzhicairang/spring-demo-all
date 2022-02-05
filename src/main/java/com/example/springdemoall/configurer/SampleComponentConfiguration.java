@@ -9,6 +9,8 @@ public class SampleComponentConfiguration extends AbstractSampleComponentConfigu
     @Bean
     public SampleComponent sampleComponent() {
         SampleComponent sampleComponent = new SampleComponent();
+
+        // 基于 SampleComponentConfigurer 进行配置
         sampleComponent.configurer(name, age);
         return sampleComponent;
     }
